@@ -18,12 +18,12 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-// Get all users except self (for user list)
+// Get all users except self
 router.get("/", authMiddleware, async (req, res) => {
   try {
     const users = await User.find(
       { _id: { $ne: req.userId } },
-      "username online"
+      "username email online"
     );
     res.json(users);
   } catch (err) {
